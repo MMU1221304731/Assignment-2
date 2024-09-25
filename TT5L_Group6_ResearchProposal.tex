@@ -8,6 +8,7 @@
 \usepackage{xspace}
 \usepackage{tikz}
 \usepackage{parskip} 
+\usepackage{multirow}
 
 
 % chart attributes
@@ -26,9 +27,9 @@
 
 % fill up your name, ID, contribution and paper title here
 \author{
-LOA TAT ANN \quad 1221304731 \quad contribution1 \\
-YU BUI XUAN \quad 241UC24121 \quad contribution2\\
-MOHD SYAMEL BIN MOHD KARID \quad 1221309130 \quad contribution3\\
+LOA TAT ANN \quad 1221304731 \quad 33.33\% \\
+YU BUI XUAN \quad 241UC24121 \quad 33.33\% \\
+MOHD SYAMEL BIN MOHD KARID \quad 1221309130 \quad 33.33\% \\
 }
 \title{ Optimizing DDoS Attack Detection with Machine Learning Algorithms and Multiple Datasets }
 
@@ -58,11 +59,23 @@ In this research proposal, we will explore the methods to create a solution that
 \section{Problem Statement}
 We have identified that dataset and algorithm issues are some of the major reasons for inaccuracies in attack detection among machine learning. The dataset is a major part of machine learning detection, as it uses the dataset to extract meaningful information to compare and detect similarities. Besides that, machine learning algorithms require the correct datasets to detect and treat the attack properly. \citeA{2} 
 
-Studies have also stated that the lack of associated datasets and their features useful for cross-comparison is a major limitation of current research on machine learning in DDoS attack detection. \citeA{1}  Also, not all datasets are comparable to each other, leading to data discrepancies. Besides that, most datasets used are outdated, redundant or contain insufficient information. For instance, the CICDDoS2019 dataset only contains 1\% of benign records, with most records being hostile, leading to an imbalance of data and bias in classification. \citeA{1} This could cause difficulty for machine learning algorithms in detecting traffic and accidentally classifying benign traffic as a threat to the network, affecting real-time deployment.
+Studies have also stated that the lack of associated datasets and their features useful for cross-comparison is a major limitation of current research on machine learning in DDoS attack detection. \citeA{1} Also, not all datasets are comparable to each other, leading to data discrepancies, as seen by the accuracy data between different algorithms on different datasets in Figure \ref{fig:1} and \ref{fig:2}. Besides that, most datasets used are outdated, redundant or contain insufficient information. For instance, the CICDDoS2019 dataset only contains 1\% of benign records, with most records being hostile, leading to an imbalance of data and bias in classification. \citeA{1} This could cause difficulty for machine learning algorithms in detecting traffic and accidentally classifying benign traffic as a threat to the network, affecting real-time deployment.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\linewidth]{CCIDS.png}
+    \caption{Algorithm accuracy on CCIDS2017 dataset. \protect\citeA{8}}
+    \label{fig:1}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\linewidth]{CAIDA.png}
+    \caption{Algorithm accuracy on CAIDA dataset. \protect\citeA{8}}
+    \label{fig:2}
+\end{figure}
 
 Researchers have proposed different methods to detect DDoS attacks, and there are differences in algorithms in various methods employed by the algorithms. Some methods, such as Support Vector Machines (SVM) and Random Forest, have excellent performance in detection, while others have recorded weaker results. Researchers use different setups for their methods to conduct experiments which contributed to the difference in test results. \citeA{8} Application of such methods also varies depending on the algorithm, where some algorithms are harder to implement than others because of a complex structure. \cite{9} 
-
-\clearpage
 
 \section{Research Questions, Hypotheses and Objectives}
 %Minimum of two and maximum of four for each of the research questions, hypotheses, and research objectives. You can use numbering/bullet point to list them out.
@@ -81,9 +94,11 @@ Researchers have proposed different methods to detect DDoS attacks, and there ar
 
 \subsection{Objectives}
 \begin{enumerate}
-  \item To evaluate the impact of dataset quality in the aspect of data completeness and relevance on the accuracy of DDoS attack detection.
-  \item To prove the performance of ensemble methods is better than individual machine learning algorithms in terms of accuracy and robustness for DDoS attack detection. 
+  \item To prove the impact of dataset quality in data completeness and diversity on the accuracy of DDoS attack detection.
+  \item To propose the architecture consists of ensemble methods for better accuracy and robustness in DDoS attack detection compared to single machine learning algorithms.
 \end{enumerate}
+
+\clearpage
 
 \section{Literature Review Summary}
 
@@ -92,6 +107,20 @@ In the papers of \citeA{6}, they approach DDoS detection with methods like Rando
 Researchers show another issue involving datasets in the research \citeA{5} states that the Bidirectional long short-term memory (BiLSTM) method performs exceptionally well with an accuracy of 82.8\%, scoring the highest compared to other research methods. However, it could come with the risk of overfitting. This occurs when researchers excessively train the model using the NSL-KDD dataset, which can lead to difficulties. Moreover, the NSL-KDD dataset may not provide an accurate depiction of the network traffic behaviour, potentially impacting the model’s efficacy, particularly in real-life scenarios.
 
  Next, the use of an ensemble algorithm which is used in GRU-LM  and Word2vec architecture system as researched by \citeA{6}, shows that the accuracy greatly improved compared to when using a single algorithm, as a result shows that the integration of Word2vec and GRU-LM together could achieve the accuracy of 87.83\%, showcasing that the method achieved approximately 30\% higher than other types of models including RNN and LSTM (Long Short-Term Memory). \citeA{6}
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{|p{5cm}|p{10cm}|}
+    \hline
+        \textbf{Summary} & \textbf{Research Gaps} \\ \hline
+        \multirow{2}{5cm}{\textbf{Dataset Reliability}} & The use of less diverse and incomplete datasets affects the performance of models. \\ \cline{2-2}
+        & The risk of overfitting could impact the model's performance in real-life scenarios. \\ \hline
+        \textbf{Ensemble Method Superiority} & The lack of ensemble methods applied in previous research shows limited improvement in accuracy, highlighting that better performance could be achieved when these methods are prioritized and applied. \\ \hline
+    \end{tabular}
+    \caption{Summary of literature review and identified research gaps.}
+    \label{table:1}
+\end{table}
+
 
 \clearpage
 
@@ -105,9 +134,9 @@ The research methodology for the work is divided into stages, which include: pre
 
 \subsection{ Selection and Training of Algorithms with Datasets}
 
-To evaluate the performance a set of machine learning algorithms are selected for the training designed to assess the performance of different methods in detecting DDoS attacks. Several algorithmic approaches are chosen, which include K-Nearest Neighbors (KNN), Support Vector Machines (SVM), Naive Based Classifiers, Random Forest, and others to create an ensemble of algorithms for research. Multiple relevant datasets, such as CCIDS2017, serve as the data sources for the algorithms. \citeA{8}
+To evaluate the performance a set of machine learning algorithms are selected for the training designed to assess the performance of different methods in detecting DDoS attacks. Several algorithmic approaches are chosen, which include K-Nearest Neighbors (KNN), Support Vector Machines (SVM), Naive Based Classifiers, Random Forest, and others are selected and classified to create an ensemble of algorithms for research. Multiple relevant datasets, such as CCIDS2017, serve as the data sources for the algorithms. \citeA{8}
 
-The training process of such algorithms is split into training and testing subsets, and each of the tests is recorded to extract important features such as packet size and traffic volume. The data are then compared with several metrics. The algorithms are compared by metrics such as accuracy, precision, and recall to determine which algorithm performed best on different conditions, and select the most effective algorithm from there.
+The training process of such algorithms is split into training and testing subsets, and each of the tests is recorded to extract important features such as packet size and traffic volume. The features are then compared with several metrics. The algorithms are compared by metrics such as accuracy, precision, and recall to determine which algorithm performed best on different conditions, and select the most effective algorithm for the research.
 
 \subsection{ Data Preprocessing Techniques }
 
@@ -133,7 +162,9 @@ This research approach guarantees the thorough and strategic approach of data pr
 
 \subsection { Development, Testing and Reporting }
 
-After the previous sections are fully processed and selected, a demonstration system will be created using known network and computing technologies. The finished system will be first tested in a controlled network environment, and after that, it will be deployed in real-world environments for a much more realistic look at its performance. An error-checking session will be conducted should the system detect anomalies, and it will be addressed properly. After the testing, a final evaluation will be conducted before reports are made and published. 
+After the previous sections are fully processed and selected, a demonstration system will be created using known network and computing technologies. The finished system will be first tested in a controlled network environment, and after that, it will be deployed in real-world environments for a much more realistic look at its performance. An error-checking session will be conducted should the system detect anomalies, and it will be addressed properly. 
+
+A final evaluation with the recorded results will be conducted. After that, reports are then made and published. 
 
 \clearpage
 
@@ -219,7 +250,7 @@ Figure \ref{gantt:1} and Table \ref{table:1} is a Gantt chart showing how long t
         \textbf{Final Report} & 2025-08-10 & 2025-09-13 & 35 days \\ \hline
     \end{tabular}
     \caption{Table of tasks involved}
-    \label{table:1}
+    \label{table:2}
 \end{table}
 
 \clearpage
@@ -227,9 +258,9 @@ Figure \ref{gantt:1} and Table \ref{table:1} is a Gantt chart showing how long t
 \section{Expected Results and Impact}
 
 \subsection{Expected Results}
-The main expected result of this research is the improvements in detection performance by selecting the best from multiple datasets and detection algorithms with a testing process. Besides that, we would also compare various algorithms to show other aspects of each algorithm and determine the best from them. By combining the data gathered we can optimize each setup for the most suitable task, enabling higher performance in DDoS attack detection. 
+The main expected result of this research is the improvements in detection performance by selecting the best from multiple datasets and detection algorithms with a testing process. Besides that, we would also compare various algorithms to show other aspects of each algorithm and determine the best from them. By combining the data gathered we can optimize each setup for the most suitable task, enabling higher performance in DDoS attack detection, while reducing false positives and false negatives. 
 
-The results from the proposal could also be affected by real-time analysis of network traffic by gathering the results among multiple algorithms. It will also demonstrate its adaptability to various environments and tests can be scaled accordingly to counter various threats. 
+The research will also show an improved capability when it comes to detecting and recognizing novel threats. It will also demonstrate its adaptability to various environments and tests can be scaled accordingly to counter various threats. 
 
 \subsection{Expected Impact of Research}
 
